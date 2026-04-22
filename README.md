@@ -1,116 +1,319 @@
-# SalesBoost - 해외 B2B 영업관리 시스템
+<div align="center">
 
-> PO(Purchase Order) 기반 무역서류 자동화와 거래 맥락 관리를 통해 해외 B2B 영업 담당자의 반복 업무를 줄이고, 본질적인 영업 활동에 집중할 수 있도록 지원하는 시스템입니다.
+<img
+  src="https://capsule-render.vercel.app/api?type=waving&height=250&color=0:0F172A,50:2563EB,100:14B8A6&text=SalesBoost&fontColor=FFFFFF&fontSize=70&fontAlignY=38&desc=Global%20B2B%20Sales%20%26%20Trade%20Document%20Automation&descSize=18&descAlignY=58"
+  alt="SalesBoost banner"
+/>
+
+<a href="https://git.io/typing-svg">
+  <img
+    src="https://readme-typing-svg.demolab.com?font=Pretendard&weight=700&size=24&duration=2600&pause=900&color=2563EB&center=true&vCenter=true&width=900&lines=%ED%95%B4%EC%99%B8+B2B+%EC%98%81%EC%97%85%EA%B4%80%EB%A6%AC+%ED%94%8C%EB%9E%AB%ED%8F%BC;PI%2FPO%2FCI%2FPL+%EB%AC%B8%EC%84%9C+%EC%9E%90%EB%8F%99%ED%99%94;%EA%B1%B0%EB%9E%98%EC%B2%98%2C+%ED%99%9C%EB%8F%99%EA%B8%B0%EB%A1%9D%2C+%EB%A9%94%EC%9D%BC+%EC%9D%B4%EB%A0%A5%EC%9D%84+%ED%95%9C+%ED%9D%90%EB%A6%84%EC%9C%BC%EB%A1%9C"
+    alt="Typing SVG"
+  />
+</a>
+
+반복되는 PI/PO/CI/PL 문서 작업, 출하·수금 추적, 거래처별 활동 기록을 연결해<br />
+영업 담당자가 문서 입력보다 실제 거래 관리에 집중할 수 있도록 만든 시스템입니다.
+
+<br />
+
+[![Java](https://img.shields.io/badge/Java-21-007396?style=for-the-badge&logo=openjdk&logoColor=white)](#)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](#)
+[![Vue](https://img.shields.io/badge/Vue-3-4FC08D?style=for-the-badge&logo=vuedotjs&logoColor=white)](#)
+[![MariaDB](https://img.shields.io/badge/MariaDB-Production-003545?style=for-the-badge&logo=mariadb&logoColor=white)](#)
+[![AWS](https://img.shields.io/badge/AWS-EKS%20%7C%20S3%20%7C%20CloudFront-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)](#)
+[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI%2FCD-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](#)
+
+<br />
+<br />
+
+<img
+  src="https://skillicons.dev/icons?i=java,spring,vue,vite,tailwind,mysql,docker,kubernetes,aws,githubactions,github&theme=light"
+  alt="Tech icons"
+/>
+
+<br />
+<br />
+
+<a href="https://salesboost-team2.site/"><strong>서비스 바로가기</strong></a>
+&nbsp;·&nbsp;
+<a href="#서비스-구성"><strong>서비스 구성</strong></a>
+&nbsp;·&nbsp;
+<a href="#기술-스택"><strong>기술 스택</strong></a>
+&nbsp;·&nbsp;
+<a href="#아키텍처"><strong>아키텍처</strong></a>
+
+</div>
+
+<br />
+
+<div align="center">
+
+| Production | Architecture | Repository |
+| --- | --- | --- |
+| <a href="https://salesboost-team2.site/">salesboost-team2.site</a> | Vue 3 + Spring MSA + EKS | Submodule Monorepo |
+
+</div>
+
+---
 
 ## 프로젝트 개요
 
 | 항목 | 내용 |
-|---|---|
-| 프로젝트명 | SalesBoost - 해외 B2B 영업관리 시스템 |
-| 팀명 | 닥트리오 (2팀) |
+| --- | --- |
+| 프로젝트명 | SalesBoost |
+| 주제 | 해외 B2B 영업관리 및 무역 문서 자동화 시스템 |
+| 팀명 | 닥트리오, 2팀 |
 | 팀원 | 강성훈, 박찬진, 정진호 |
-| 프로젝트 기간 | 2026.02.27 ~ 2026.04.22 (8주) |
+| 기간 | 2026.02.27 ~ 2026.04.22 |
 | 소속 | 한화시스템 BEYOND SW캠프 22기 |
 
-## 프로젝트 배경
+## 문제 정의
 
-해외 제조업 기반 B2B 거래에서는 PI, PO, 생산/구매 지시서, 출하지시서, CI/PL 등 단계별 문서가 매우 많고, 동일 정보를 반복 입력하는 과정에서 누락/오입력으로 인한 납기 지연과 신뢰도 하락이 빈번하게 발생합니다. 또한 협의 사항, 회의록, 일정 등 핵심 맥락이 개인별로 흩어져 업무 연속성이 단절되는 문제가 반복되고 있습니다.
+해외 제조업 기반 B2B 거래에서는 하나의 주문이 확정되기까지 PI, PO, 생산지시서, 출하지시서, CI, PL, 수금 및 출하 현황 등 여러 문서와 상태가 연쇄적으로 발생합니다.<br />
+기존 업무는 동일한 거래처·품목·납기·금액 정보를 여러 화면과 문서에 반복 입력해야 했고, 담당자 변경 시 회의록·이슈·메일 이력이 흩어져 업무 맥락을 복원하기 어려웠습니다.
 
-## 주요 기능
+SalesBoost는 이 흐름을 하나의 거래 단위로 연결합니다.
 
-### 1. 무역서류 자동화
-- PO를 원천 데이터로 활용한 생산지시서/출하지시서 자동 생성
-- CI(Commercial Invoice), PL(Packing List) 자동 생성 및 PDF 발행
-- PI/PO 수정 시 하위 문서 자동 동기화
-- 지시번호 자동 발번
+<div align="center">
 
-### 2. 영업 진행 현황 관리
-- 출하 현황 추적 (준비/출하/운송중/도착/완료)
-- 지연 상태 관리 (정상/지연위험/지연)
-- 판매 현황 조회 (수금/미수금, 월별 매출, 거래처별 수금 현황)
+<table>
+  <tr>
+    <td align="center" width="25%">
+      <strong>Document Automation</strong><br />
+      PI, PO, CI, PL, 지시서 자동 생성
+    </td>
+    <td align="center" width="25%">
+      <strong>Context Tracking</strong><br />
+      활동 기록, 메일 이력, 담당자 변경 이력
+    </td>
+    <td align="center" width="25%">
+      <strong>Approval Flow</strong><br />
+      등록·수정 요청과 팀장 승인
+    </td>
+    <td align="center" width="25%">
+      <strong>Cloud Delivery</strong><br />
+      S3, CloudFront, EKS 기반 운영 배포
+    </td>
+  </tr>
+</table>
 
-### 3. 거래 맥락 관리 및 활동기록
-- 거래처별 정보 페이지: 협의 사항, 회의록, 일정, 문서 이력, 이슈 등 통합 관리
-- 활동기록 자동 패키지(PDF): 담당자 변경 시 스냅샷 출력으로 업무 연속성 유지
-- 담당자 기반 권한 정책 및 자동 이관
+</div>
 
-### 4. 메일 발송 및 이력 관리
-- SMTP(Gmail/Naver) 연동 PDF 첨부 메일 발송
-- Thymeleaf 기반 표준화된 메일 템플릿
-- 거래처별 메일 발송 이력 자동 축적 및 조회
+| 기존 문제 | SalesBoost의 해결 방식 |
+| --- | --- |
+| 문서마다 동일 정보 반복 입력 | PI/PO 데이터를 기반으로 후속 문서 자동 생성 |
+| 수량·납기 변경 시 하위 문서 불일치 | 수정 요청·승인 흐름과 관련 문서 동기화 |
+| 거래처별 협의 이력 분산 | 활동 기록, 컨택, 메일 이력, 문서 이력을 거래처/PO 기준으로 통합 |
+| 담당자 변경 시 맥락 손실 | 활동 패키지 PDF와 권한 기반 열람 정책 제공 |
+| 발송 문서와 메일 이력 추적 어려움 | PDF 첨부 메일 발송 및 이력 자동 저장 |
+
+## 핵심 기능
+
+| 영역 | 기능 |
+| --- | --- |
+| 무역 문서 | PI/PO 생성, 수정 요청·승인, CI/PL 생성, PDF 발행 |
+| 지시서 | PO 기반 생산지시서·출하지시서 자동 생성, 납기 변경 전파 |
+| 출하/수금 | 출하 진행 상태, 수금/미수금, 거래처별 실적 추적 |
+| 거래처 관리 | 거래처, 바이어, 국가, 항구, 통화, 결제조건 관리 |
+| 품목 관리 | 품목 등록, 단위/규격/단가/중량 관리 |
+| 활동 기록 | 미팅, 이슈, 메모, 일정 기록 및 PO 연결 |
+| 활동 패키지 | 기간·PO·활동 기록 기반 PDF 패키지 생성 |
+| 메일 | 문서 PDF 첨부 발송, HTML 메일 템플릿, 발송 이력 관리 |
+| 권한 | 관리자, 영업, 생산, 출하 역할 기반 접근 제어 |
+
+## 서비스 구성
+
+| 서비스 | 포트 | 책임 |
+| --- | ---: | --- |
+| `team2-gateway` | 8010 | API Gateway, JWT 검증, 라우팅 |
+| `team2-backend-auth` | 8011 | 인증, 사용자, 부서, 팀, 직급, 회사 정보 |
+| `team2-backend-master` | 8012 | 거래처, 바이어, 품목, 국가, 항구, 통화, 결제조건 |
+| `team2-backend-activity` | 8013 | 영업활동, 컨택, 메일 이력, 활동 패키지 |
+| `team2-backend-documents` | 8014 | PI/PO/CI/PL, 생산·출하지시서, 출하·수금 |
+| `team2-frontend` | - | Vue 3 기반 사용자 화면 |
+
+## 아키텍처
+
+```mermaid
+flowchart LR
+    U[User] --> CF[CloudFront]
+    CF --> S3[S3 Static Frontend]
+    U --> ALB[Application Load Balancer]
+    ALB --> GW[Spring Cloud Gateway]
+
+    GW --> AUTH[Auth Service]
+    GW --> MASTER[Master Service]
+    GW --> ACT[Activity Service]
+    GW --> DOCS[Documents Service]
+
+    AUTH --> DB[(MariaDB)]
+    MASTER --> DB
+    ACT --> DB
+    DOCS --> DB
+
+    DOCS --> PDF[PDF Renderer]
+    ACT --> MAIL[SMTP Mail]
+    DOCS --> OBJ[S3 Object Storage]
+
+    GH[GitHub Actions] --> IMG[Container Images]
+    IMG --> EKS[EKS Rolling Deploy]
+    EKS --> GW
+```
+
+## 데이터 흐름
+
+```mermaid
+sequenceDiagram
+    participant Sales as 영업 담당자
+    participant Docs as Documents Service
+    participant Master as Master Service
+    participant Activity as Activity Service
+    participant Mail as Mail/PDF
+
+    Sales->>Docs: PI 등록
+    Docs->>Master: 거래처/품목 기준정보 조회
+    Sales->>Docs: PO 등록 또는 승인 요청
+    Docs->>Docs: 생산/출하지시서 생성
+    Sales->>Activity: 미팅/이슈/일정 기록
+    Sales->>Docs: CI/PL 생성
+    Docs->>Mail: PDF 렌더링 및 메일 발송
+    Mail->>Activity: 발송 이력 저장
+```
 
 ## 기술 스택
 
+<div align="center">
+
+<img
+  src="https://github-readme-stats.vercel.app/api/pin/?username=beyond-sw-camp&repo=be22-final-team2&theme=tokyonight&hide_border=true&border_radius=12"
+  alt="Repository card"
+/>
+
+</div>
+
 ### Backend
-- Java 21, Spring Boot 3
-- Spring Web (REST), Spring Validation
-- Spring Security + JWT (RBAC)
-- JPA (Command) + MyBatis (Query) — CQRS 패턴
-- Flyway (DB Migration)
-- OpenHTMLtoPDF (PDF 생성)
-- Spring Boot Mail (SMTP) + Thymeleaf (메일 템플릿)
-- Swagger (API 문서화)
+
+| 분류 | 기술 |
+| --- | --- |
+| Language | Java 21 |
+| Framework | Spring Boot 3, Spring Web, Spring Validation |
+| Security | Spring Security, JWT, RBAC |
+| Persistence | JPA for Command, MyBatis for Query, CQRS 구조 |
+| Integration | OpenFeign, Internal API Token |
+| Document | HTML 기반 PDF 렌더링, Thymeleaf 메일 템플릿 |
+| API Docs | Swagger / OpenAPI |
 
 ### Frontend
-- Vue 3, Vite
-- Pinia (상태 관리), Vue Router
-- Tailwind CSS
-- Axios, Chart.js
 
-### Data
-- MariaDB (주 DB) — AWS RDS Primary/StandBy 구성 (Multi-AZ Sync Replication)
-- Redis — Amazon ElastiCache (캐시/세션)
+| 분류 | 기술 |
+| --- | --- |
+| Framework | Vue 3, Vite |
+| State | Pinia |
+| Routing | Vue Router |
+| Styling | Tailwind CSS |
+| HTTP | Axios |
+| Visualization | Chart.js |
 
-### Infrastructure & DevOps
-- **AWS**: VPC (Multi-AZ), ALB, RDS, ElastiCache, S3, CloudFront, NAT Gateway
-- **Container/Orchestration**: Docker, Kubernetes (EKS), CoreDNS
-- **CI/CD**: GitHub Actions
-  - Frontend: Vue3 Build → S3 배포 → CloudFront Invalidation
-  - Backend: Spring Boot Build → Docker Image → kubectl apply
+### Infrastructure
 
-## 시스템 아키텍처
+| 분류 | 기술 |
+| --- | --- |
+| Runtime | Docker, Kubernetes, AWS EKS |
+| Static Hosting | S3, CloudFront |
+| Ingress | ALB, Route 53 |
+| Database | MariaDB |
+| Storage | S3 |
+| Delivery | GitHub Actions, ArgoCD Image Updater |
 
+## 모노레포 구조
+
+```text
+be22-final-team2
+├─ team2-frontend
+├─ team2-gateway
+├─ team2-backend-auth
+├─ team2-backend-master
+├─ team2-backend-activity
+├─ team2-backend-documents
+├─ team2-manifest
+├─ ddl
+└─ db
 ```
-[User] → [CloudFront + S3] (Frontend)
-[User] → [ALB] → [EKS Cluster]
-                    ├── Auth Pod
-                    ├── Master Pod
-                    ├── Document Pod
-                    └── Activity Pod
-                         ↓
-              [RDS MariaDB Primary/StandBy]
-              [ElastiCache for Redis]
 
-[Developer] → [GitHub] → [GitHub Actions] → Build & Deploy
-```
+## 역할 분담
 
-- **Multi-AZ 배포**: AZ1/AZ2에 걸친 고가용성 구성
-- **네트워크**: Public Subnet (NAT Gateway, ALB) + Private Subnet (App Pods, DB)
-- **서비스 간 통신**: OpenFeign (동기), Redis Pub/Sub (비동기)
-
-## 마이크로서비스 구성
-
-| 서비스 | 담당자 | 핵심 기능 |
-|---|---|---|
-| Auth Service | 정진호 | JWT 발급/검증, RBAC 권한 관리, 담당자 변경 시 권한 이관, 사용자 관리 |
-| Master Service | 정진호 | 거래처/품목 CRUD, 통화/국가/항구 정보  |
-| Document Service | 강성훈 | PI/PO CRUD, 생산/출하 지시서 자동 생성, CI/PL 자동 생성, 출하/수금 현황 관리 |
-| Activity Service | 박찬진 |  활동기록 ,활동기록 패키지, 거래처 연락망 관리, 메일 이력 관리 |
-
-### 공통 역할
-
-| 담당자 | 공통 역할 |
-|---|---|
-| 정진호 | GitOps 설정, CI/CD 파이프라인, AWS 인프라 관리 |
-| 강성훈 | 프론트엔드 공통 컴포넌트, 레이아웃/라우팅 |
-| 박찬진 | GitHub 공통설정 (MileStone 등) |
+| 팀원 | 담당 영역 |
+| --- | --- |
+| 강성훈 | Documents 도메인, PI/PO/CI/PL, 생산·출하 지시서, 프론트 공통 UI |
+| 박찬진 | Activity 도메인, 활동 기록, 활동 패키지, 컨택, 메일 이력 |
+| 정진호 | Auth/Master 도메인, 사용자·조직·거래처·품목, AWS/CI/CD/GitOps |
 
 ## 프로젝트 일정
 
-| 단계 | 기간 | 마일스톤 |
-|---|---|---|
-| 1 | 02/27 ~ 03/13 | 기획 (기획서, 요구사항 정의서, 아키텍처 설계, WBS, ERD, 화면설계서) |
-| 2 | 03/09 ~ 03/20 | 프론트엔드 설계 및 구축 |
-| 3 | 03/23 ~ 04/10 | 백엔드 설계 및 구축 (중간발표 03/23) |
-| 4 | 04/13 ~ 04/17 | 시스템 통합 및 테스트 |
-| 5 | 04/20 ~ 04/22 | 최종 발표 (04/22) |
+| 단계 | 기간 | 주요 산출물 |
+| --- | --- | --- |
+| 1 | 02/27 ~ 03/13 | 기획서, 요구사항 정의서, WBS, ERD, 화면설계 |
+| 2 | 03/09 ~ 03/20 | 프론트엔드 설계 및 공통 컴포넌트 구축 |
+| 3 | 03/23 ~ 04/10 | 백엔드 도메인 구현, 중간 발표 |
+| 4 | 04/13 ~ 04/17 | 서비스 통합, 문서/메일/PDF 흐름 검증 |
+| 5 | 04/20 ~ 04/22 | AWS 배포, 운영 검증, 최종 발표 |
+
+## 로컬 실행
+
+```bash
+git clone --recursive https://github.com/beyond-sw-camp/be22-final-team2.git
+cd be22-final-team2
+```
+
+각 백엔드는 서비스별 환경변수와 DB 연결 정보가 필요합니다.
+
+```bash
+cd team2-backend-auth
+./gradlew bootRun
+```
+
+프론트엔드는 Vite 개발 서버로 실행합니다.
+
+```bash
+cd team2-frontend
+npm install
+npm run dev
+```
+
+## 배포 흐름
+
+```mermaid
+flowchart LR
+    DEV[Developer] --> PR[GitHub PR]
+    PR --> ACT[GitHub Actions]
+    ACT --> FE[Frontend Build]
+    ACT --> BE[Backend Build]
+    FE --> S3[S3 Upload]
+    S3 --> CDN[CloudFront Invalidation]
+    BE --> REG[Container Registry]
+    REG --> ARGO[ArgoCD Image Updater]
+    ARGO --> EKS[EKS Rolling Update]
+```
+
+## 프로젝트 포인트
+
+- 실무 무역 문서 흐름을 PI → PO → CI/PL → 출하/수금까지 연결했습니다.
+- MSA 경계를 유지하면서 Feign 기반 조회 보강과 best-effort 응답을 적용했습니다.
+- 권한과 조직 구조를 팀 중심으로 설계해 부서 변경과 담당자 이관에 대응했습니다.
+- 운영 환경은 정적 프론트와 API 백엔드를 분리해 S3/CloudFront/EKS로 배포했습니다.
+- PDF, 메일, 활동 기록을 결합해 문서 발송 후에도 거래 맥락을 추적할 수 있게 했습니다.
+
+---
+
+<div align="center">
+
+**SalesBoost**<br />
+해외 B2B 영업 업무의 반복 입력을 줄이고, 거래의 흐름을 끝까지 추적하기 위한 팀 프로젝트입니다.
+
+<img
+  src="https://capsule-render.vercel.app/api?type=waving&height=120&section=footer&color=0:14B8A6,50:2563EB,100:0F172A"
+  alt="Footer wave"
+/>
+
+</div>
