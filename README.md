@@ -1,8 +1,9 @@
 <div align="center">
 
 <img
-  src="https://capsule-render.vercel.app/api?type=waving&height=250&color=0:0F172A,50:2563EB,100:14B8A6&text=SalesBoost&fontColor=FFFFFF&fontSize=70&fontAlignY=38&desc=Global%20B2B%20Sales%20%26%20Trade%20Document%20Automation&descSize=18&descAlignY=58"
+  src="./assets/readme/salesboost-banner.svg"
   alt="SalesBoost banner"
+  width="100%"
 />
 
 <a href="https://git.io/typing-svg">
@@ -185,10 +186,20 @@ sequenceDiagram
 
 <div align="center">
 
-<img
-  src="https://github-readme-stats.vercel.app/api/pin/?username=beyond-sw-camp&repo=be22-final-team2&theme=tokyonight&hide_border=true&border_radius=12"
-  alt="Repository card"
-/>
+<table>
+  <tr>
+    <td align="center"><strong>Backend</strong></td>
+    <td align="center"><img src="https://skillicons.dev/icons?i=java,spring,mysql&theme=light" alt="Backend stack" /></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Frontend</strong></td>
+    <td align="center"><img src="https://skillicons.dev/icons?i=vue,vite,tailwind,js&theme=light" alt="Frontend stack" /></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>DevOps</strong></td>
+    <td align="center"><img src="https://skillicons.dev/icons?i=docker,kubernetes,aws,githubactions,github&theme=light" alt="DevOps stack" /></td>
+  </tr>
+</table>
 
 </div>
 
@@ -310,10 +321,5 @@ flowchart LR
 
 **SalesBoost**<br />
 해외 B2B 영업 업무의 반복 입력을 줄이고, 거래의 흐름을 끝까지 추적하기 위한 팀 프로젝트입니다.
-
-<img
-  src="https://capsule-render.vercel.app/api?type=waving&height=120&section=footer&color=0:14B8A6,50:2563EB,100:0F172A"
-  alt="Footer wave"
-/>
 
 </div>
