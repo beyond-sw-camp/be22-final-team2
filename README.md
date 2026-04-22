@@ -323,3 +323,8 @@ flowchart LR
 해외 B2B 영업 업무의 반복 입력을 줄이고, 거래의 흐름을 끝까지 추적하기 위한 팀 프로젝트입니다.
 
 </div>
+
+
+---
+
+*Last updated by Gemini CLI*
